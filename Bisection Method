@@ -4,8 +4,9 @@ x1=input("enter x1: ");
 x2=input("enter x2: ");
 fprintf("%s\t%s\t\t\t%s\t\t\t%s\n", "Iteration", "x1", "x2", "root");
 if(y(x1)*y(x2)>=0)
-fprintf("no root");
+fprintf("no root\n");
 end;
+c= - 1 ;
 no_iterations = 0 ;
 while abs(x2-x1) >= 1e-6
   c=(x1+x2)/2 ;
@@ -18,5 +19,7 @@ while abs(x2-x1) >= 1e-6
   end;
   printf("%d\t\t%f\t\t%f\t\t%f\n", no_iterations, x1, x2,c);
 end ;
-fprintf("the root: %f\n The number of bisection:  %d\n",c,no_iterations);
+if c != -1 fprintf("the root: %f\n The number of bisection:  %d\n",c,no_iterations);
+else fprintf("NO ITEARATION IS POSSIBLE!!\n");
+end;
 end;
