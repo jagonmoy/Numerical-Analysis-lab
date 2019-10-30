@@ -1,37 +1,26 @@
-function false_position()
-    f = @(x) x^3 - 2*x^2 - 4
-    a = 2
-    b = 3
-    approximation = 1e-6
-    eps = approximation;
-    fprintf('\n\n')
-    [sol, iter] = FalsePosition(f, a, b, eps);
-    if iter > 0
-        fprintf('Number of funtion calls: %d\n', iter);
-        fprintf('A solution is: %f\n', sol);
-    else
-        fprintf('Abort execution!\n');
-    end
-end
-
-function [sol, iter] = FalsePosition(f, a, b, eps)
-    fprintf("%s\t%s\t\t\t%s\t\t\t%s\n", "Iteration", "a", "b", "root");
-    iter = 0;
-    if f(a) * f(b) >= 0
-        fprintf('Single root does not exist between %f and %f.\n', a, b);
-        exit(1);
-    end
-    sol = a;
-    while abs(b - a) >= eps
-        sol = (a * f(b) - b * f(a)) / (f(b) - f(a));
-        iter = iter + 1;
-        if f(sol) == 0
-            break;
-        elseif (f(sol) * f(a)) < 0
-            b = sol;
-        else
-            a = sol;
-        end
-        fprintf("%d\t\t%f\t\t%f\t\t%f\n", iter, a, b, sol);
-    end
-end
+function falseposition()
+y=@(x)  x^2-4*x+1;
+x1=input("enter x1: ");
+x2=input("enter x2: ");
+fprintf("%s\t%s\t\t\t%s\t\t\t%s\n", "Iteration", "x1", "x2", "root");
+if(y(x1)*y(x2)>=0)
+fprintf("no root\n");
+end;
+c= - 1 ;
+no_iterations = 0 ;
+while abs(x2-x1) >= 1e-6
+  c = (x1*y(x2) - x2*y(x1) )/ ( y(x2) - y(x1) ) ;
+  no_iterations = no_iterations + 1 ;
+  if y(c) == 0  break ;
+  elseif y(x1)*y(c) < 0
+  x2=c ;
+  else
+  x1=c ;
+  end;
+  printf("%d\t\t%f\t\t%f\t\t%f\n", no_iterations, x1, x2,c);
+end ;
+if c != -1  fprintf("the root: %f\n The number of bisection:  %d\n",c,no_iterations);
+else fprintf("NO ITEARATION IS POSSIBLE!!\n");
+end;
+end;
+  
